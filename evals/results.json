@@ -1,0 +1,508 @@
+[
+  {
+    "question": "According to the 70‑20‑10 rule, what percentage of my development should come from on‑the‑job and action learning?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "70% of your development should come from on‑the‑job and action learning.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.69,
+        "contradict": 0.97
+      }
+    ]
+  },
+  {
+    "question": "What factors are considered when evaluating potential partners for external engagement?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "When evaluating potential partners for external engagement, GitLab considers whether the opportunity offers exposure or career promotion, gathers feedback from previous engagements and public sentiment, and assesses cost alignment with budget, cross‑department cost sharing, and impact on funding other partnerships.",
+        "sources": [
+          2
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.61,
+        "contradict": 0.02
+      }
+    ]
+  },
+  {
+    "question": "What app should I download to access LevelUp on my mobile device?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "You should download the Cornerstone Galaxy app to access LevelUp on your mobile device.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.98,
+        "contradict": 0.28
+      }
+    ]
+  },
+  {
+    "question": "What is the minimum and maximum length of an interim period before a team member can be promoted to a permanent role?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The interim period should last at least 30 days and no more than 4 months.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.83,
+        "contradict": 0.11
+      }
+    ]
+  },
+  {
+    "question": "Does GitLab have a no‑tolerance harassment policy that applies to all employees worldwide?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "GitLab has a no‑tolerance harassment policy that applies to all employees worldwide.",
+        "sources": [
+          1,
+          2
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.02,
+        "contradict": 0.21
+      }
+    ]
+  },
+  {
+    "question": "Can an employee withdraw from the mediation process at any time?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "An employee may withdraw from the mediation process at any time by notifying the mediator in writing.",
+        "sources": [
+          1
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.17,
+        "contradict": 0.43
+      }
+    ]
+  },
+  {
+    "question": "How many weeks of paid parental leave does GitLab provide?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "GitLab provides 16 weeks of paid Parental Leave.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.96,
+        "contradict": 0.01
+      }
+    ]
+  },
+  {
+    "question": "How does the People Operations team maintain the GitLab Handbook?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The People Operations team collaborates with internal and external stakeholders to keep the GitLab Handbook consistently maintained and ensures that all employment‑related information is easily accessible to all team members.",
+        "sources": [
+          5,
+          3
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.86,
+        "contradict": 0.03
+      }
+    ]
+  },
+  {
+    "question": "What are the five manager competencies listed in the company's handbook?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The five manager competencies listed in the company's handbook are Emotional Intelligence, Modeling a Culture of Feedback, Coaching, Conflict Resolution, and Building High Performing Teams.",
+        "sources": [
+          2
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.01,
+        "contradict": 0.3
+      }
+    ]
+  },
+  {
+    "question": "If I miss a scheduled GitLab session, can I make it up in a public session hosted by Hone?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Yes, you can make up a missed GitLab session in a public session hosted by Hone.",
+        "sources": [
+          1,
+          2
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.98,
+        "contradict": 0.01
+      }
+    ]
+  },
+  {
+    "question": "What should I do if I need more support after the People Analytics Office Hours session?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "If you need more support after the People Analytics Office Hours session, you can set up time with the People Analytics team or submit an issue for additional support asynchronously.",
+        "sources": [
+          1
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.06,
+        "contradict": 0.01
+      }
+    ]
+  },
+  {
+    "question": "If I prefer not to confront the harasser directly, who should I contact to report harassment?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "If you prefer not to confront the harasser directly, you should report the harassment to the Chief People Officer, Team Member Relations, or a People Business Partner.",
+        "sources": [
+          1,
+          5
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.97,
+        "contradict": 0.5
+      }
+    ]
+  },
+  {
+    "question": "What documents does GitLab provide for a Japan Engineer Visa application?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "GitLab can provide company information for a Japan Engineer Visa application.",
+        "sources": [
+          1
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.0,
+        "contradict": 0.23
+      }
+    ]
+  },
+  {
+    "question": "What responsibilities does a Director+ have in translating strategy into tactics during organizational change?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "A Director+ translates strategy into tactics, coaches managers through change, allocates resources, and manages competing initiatives, budget constraints, and pressure from multiple directions.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.97,
+        "contradict": 0.76
+      }
+    ]
+  },
+  {
+    "question": "What is the minimum number of respondents required for a manager to view quantitative results from engagement surveys?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "A manager must have more than 5 respondents to view quantitative results.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.62,
+        "contradict": 0.17
+      }
+    ]
+  },
+  {
+    "question": "Is it permissible to forward confidential business emails to a personal external email address?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Forwarding confidential business emails to a personal external email address is prohibited.",
+        "sources": [
+          1
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.02,
+        "contradict": 0.35
+      }
+    ]
+  },
+  {
+    "question": "What steps should I follow to create, sign, and send an e‑card using DocuSign?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "To create, sign, and send an e‑card using DocuSign, you create the card in a program such as Google Docs, upload it to DocuSign, assign signatures to the desired signers and send the request, wait for email notifications when each signer signs, download the fully signed document, and then share it via Slack or email to the recipient.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.9,
+        "contradict": 0.32
+      }
+    ]
+  },
+  {
+    "question": "What are the two questions I should ask myself to clarify a tool‑specific goal for learning GitLab?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The two questions to clarify a tool‑specific goal for learning GitLab are: what will you do to improve your understanding of the GitLab product, and how will you show that you have improved your understanding of the GitLab product or what you expect to be able to do?",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.85,
+        "contradict": 0.05
+      }
+    ]
+  },
+  {
+    "question": "What is the first step in GitLab's manager training pathway?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The first step in GitLab's manager training pathway is to start with the Becoming a GitLab Manager issue.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.99,
+        "contradict": 0.11
+      }
+    ]
+  },
+  {
+    "question": "Who should I contact to report a harassment incident at GitLab Ireland Ltd?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "You should contact Team Member Relations at teammemberrelations@gitlab.com to report a harassment incident at GitLab Ireland Ltd.",
+        "sources": [
+          1,
+          4
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.02,
+        "contradict": 0.01
+      }
+    ]
+  },
+  {
+    "question": "What is the favourability rating for the factor “Company Confidence” at GitLab?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The favourability rating for the factor “Company Confidence” at GitLab is 94%.",
+        "sources": [
+          2
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.62,
+        "contradict": 0.15
+      }
+    ]
+  },
+  {
+    "question": "Where can I find the resources for competency‑based learning and development?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Resources for competency‑based learning and development can be found in the Talent Development > Leveraging Content Partner Resources section, which provides access to premium content from leading industry partners such as Masterclass, Google Cloud Skills Boost, O'Reilly, and LevelUp.",
+        "sources": [
+          2
+        ],
+        "verdict": "UNSUPPORTED",
+        "entail": 0.11,
+        "contradict": 0.03
+      }
+    ]
+  },
+  {
+    "question": "According to GitLab's People Analytics Data Governance, what should be done with personal data that is no longer needed?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Personal data should be deleted or anonymized when it is no longer needed.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.98,
+        "contradict": 0.65
+      }
+    ]
+  },
+  {
+    "question": "Which resource is a Harvard Business Review article about managing former peers?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "The Harvard Business Review article about managing former peers is titled \"How to Manage Your Former Peers\".",
+        "sources": [
+          2
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.99,
+        "contradict": 0.92
+      }
+    ]
+  },
+  {
+    "question": "What actions must a manager take if they become aware of alleged harassment?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "If a manager becomes aware of alleged harassment, they must take the complaint seriously, report it immediately to a People Business Partner, and take appropriate action to prevent retaliation or recurrence during and after the investigation.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.9,
+        "contradict": 0.0
+      }
+    ]
+  },
+  {
+    "question": "If I’m a sales employee receiving commissions, how will my commissions be handled while I’m on parental leave?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Sales employees receiving commissions should consult the sales commission policy for guidance on how commissions are handled while on parental leave, and can submit a Compass ticket to the sales commission team if they have specific questions.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.96,
+        "contradict": 0.17
+      }
+    ]
+  },
+  {
+    "question": "What type of contract should a team member in the Netherlands receive after completing a 1‑year fixed‑term contract?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "After completing a 1‑year fixed‑term contract, a team member in the Netherlands should receive an indefinite contract.",
+        "sources": [
+          1,
+          4
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.84,
+        "contradict": 0.65
+      }
+    ]
+  },
+  {
+    "question": "What does the term “Impact” refer to in the context of Engagement Surveys?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "Impact refers to a statistical technique called driver analysis that identifies the most important drivers of outcomes for culture, i.e., the questions that have the biggest impact on engagement.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.92,
+        "contradict": 0.21
+      }
+    ]
+  },
+  {
+    "question": "Who must approve an off‑cycle promotion for a Director+ level employee?",
+    "expected": true,
+    "predicted": true,
+    "claims": [
+      {
+        "text": "An off‑cycle promotion for a Director+ level employee requires approval from the E‑Group Leader.",
+        "sources": [
+          1
+        ],
+        "verdict": "VERIFIED",
+        "entail": 0.88,
+        "contradict": 0.11
+      }
+    ]
+  },
+  {
+    "question": "What is the weather in Bangalore today?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  },
+  {
+    "question": "Who won the last cricket world cup?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  },
+  {
+    "question": "How do I reset my Netflix password?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  },
+  {
+    "question": "What is the recipe for chicken biryani?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  },
+  {
+    "question": "Which programming language is best for beginners?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  },
+  {
+    "question": "What is the capital of Australia?",
+    "expected": false,
+    "predicted": false,
+    "claims": []
+  }
+]

@@ -1,0 +1,81 @@
+UNSUPPORTED (entail=0.02)
+Q: Does GitLab have a no‑tolerance harassment policy that applies to all employees worldwide?
+A: GitLab has a no‑tolerance harassment policy that applies to all employees worldwide. [1, 2]
+SOURCE [1] Perspective: GitLab is a global organization and our team is distributed all over the world, so we strive to ensure our team is fully aligned with GitLab's no tolerance harassment policy despite their location. We want everyone to feel confident and comfortable communicating concerns. GitLab respects, appreciates, understands and supports every aspect of diversity. We aim to continuously foster a globally aware team.
+SOURCE [2] Scope: This policy applies to all team members of GitLab, whether contractor or employee, in all locations. There are local labor laws in every country and in the case of the United States, state laws, that must be followed when handling, reporting and investigating incidents of harassment. The People Business Partner team and legal counsel, if required, in each of those countries will be called upon to ensure compliance and the appropriate legal processes and procedures are followed. Specific country requirements for employees (subject to changes in employment law) are listed in the [Country & US State-Specific Requirements](#country--us-state-specific-requirements) section and will be updated reg
+------------------------------------------------------------
+UNSUPPORTED (entail=0.17)
+Q: Can an employee withdraw from the mediation process at any time?
+A: An employee may withdraw from the mediation process at any time by notifying the mediator in writing. [1]
+SOURCE [1] GitLab Ireland Ltd: 1. Mediation is an alternative method of resolving issues relating to bullying, harassment and sexual harassment. Mediation involves the parties seeking to arrive at a solution through mutual agreement, rather than through an investigation and decision.
+1. Mediation provides a confidential opportunity for the person who feels that they have been bullied, harassed or sexually harassed and the person(s) accused of carrying out this inappropriate behaviour to discuss the matter and to reach an agreement on their continuing working relationship.
+1. Mediation is conducted in private, and is directly between the parties concerned, with the support of a mediator, who will act as an independent faci
+------------------------------------------------------------
+UNSUPPORTED (entail=0.01)
+Q: What are the five manager competencies listed in the company's handbook?
+A: The five manager competencies listed in the company's handbook are Emotional Intelligence, Modeling a Culture of Feedback, Coaching, Conflict Resolution, and Building High Performing Teams. [2]
+SOURCE [2] Manager and Leadership Competencies: In addition to our values, remote work, and functional competencies, we have identified manager competencies that serve as the foundation to a whole person approach to management. Our leadership and management development programs incorporate the competencies as the bedrock for creating impactful training for our people.
+
+1. [Emotional Intelligence](/handbook/leadership/emotional-intelligence/)
+1. [Modeling a Culture of Feedback](/handbook/people-group/guidance-on-feedback/#modeling-a-culture-of-feedback-manager-competency)
+1. [Coaching](/handbook/leadership/coaching/)
+1. [Conflict Resolution](/handbook/leadership/managing-conflict/)
+1. [Building High Performing Teams](/handbook/leadership/#
+------------------------------------------------------------
+UNSUPPORTED (entail=0.06)
+Q: What should I do if I need more support after the People Analytics Office Hours session?
+A: If you need more support after the People Analytics Office Hours session, you can set up time with the People Analytics team or submit an issue for additional support asynchronously. [1]
+SOURCE [1] During the Session: * Questions are typically addressed in the order they appear on the agenda
+* Feel free to ask questions that come to mind in the moment
+* Take advantage of the collaborative environment to learn from others' questions, no need to ask anything specific if you'd just like to join the conversation to listen
+
+* If more support is needed, feel free to set up time with the People Analytics team or submit an issue for additional support async
+------------------------------------------------------------
+UNSUPPORTED (entail=0.0)
+Q: What documents does GitLab provide for a Japan Engineer Visa application?
+A: GitLab can provide company information for a Japan Engineer Visa application. [1]
+SOURCE [1] Japan Engineer Visa: GitLab can provide company information for this visa application. The employee is responsible for their own application and all fees associated with the visa. May be valid for 1 year, 3 years, or 5 years depending on the visa approval, and may be extended/renewed. GitLab cannot assist team members with obtaining a Certificate of Eligibility (COE).
+
+For People Operations internal processing:
+
+When receiving these requests from team members via Compass, provide the following documents to the team member:
+
+- [Company Registration Document](https://drive.google.com/drive/folders/1cLcoIGyb501Zod4OXIKuZjPIL8b7eo8e)
+- Current Year Financials (which can be found in this [folder](https://drive.google
+------------------------------------------------------------
+UNSUPPORTED (entail=0.02)
+Q: Is it permissible to forward confidential business emails to a personal external email address?
+A: Forwarding confidential business emails to a personal external email address is prohibited. [1]
+SOURCE [1] Unacceptable Email and Communications Activities: Forwarding of confidential business emails or documents to personal external email addresses is prohibited. Automated forwarding of emails from a team member account is also prohibited.
+
+> Note: GitLab may retrieve messages from archives and servers without prior notice if GitLab has sufficient reason to do so. If deemed necessary, this investigation will be conducted with the knowledge and approval of the Security, People Business Partners, and Legal Departments.
+
+In addition to following the [Team Member Social Media Policy](/handbook/marketing/team-member-social-media-policy/), when utilizing social media think about the effects of statements that you make. Keep in mind that these transmi
+------------------------------------------------------------
+UNSUPPORTED (entail=0.02)
+Q: Who should I contact to report a harassment incident at GitLab Ireland Ltd?
+A: You should contact Team Member Relations at teammemberrelations@gitlab.com to report a harassment incident at GitLab Ireland Ltd. [1, 4]
+SOURCE [1] GitLab Ireland Ltd: **Complaint Procedure and Contacts**
+
+The Company is aware of and recognises the effect that bullying, harassment and sexual harassment can have on its team members.
+
+- "Contact Person" – Team Member Relations: teammemberrelations@gitlab.com
+- "Designated Person" - For each formal complaint that is reported through Lighthouse, a Designated Person will be appointed by the Company to deal with the specific issue.
+
+*Informal Procedure*
+SOURCE [4] GitLab Ireland Ltd: 1. The Company is of the view that an informal approach to solving matters can often be effective. In the first instance, an attempt should be made to address an allegation of bullying, harassment and sexual harassment on an informal basis through the procedure set out below.
+1. If you believe you are being bullied, harassed or sexually harassed you should explain clearly to the alleged perpetrator(s) that you find the behaviour in question to be unacceptable. If you would find it difficult to approach the alleged perpetrator(s) directly, then you may seek the advice or assistance of Team Member Relations. You may then request the assistance of Team Member Relations in raising the issue with
+------------------------------------------------------------
+UNSUPPORTED (entail=0.11)
+Q: Where can I find the resources for competency‑based learning and development?
+A: Resources for competency‑based learning and development can be found in the Talent Development > Leveraging Content Partner Resources section, which provides access to premium content from leading industry partners such as Masterclass, Google Cloud Skills Boost, O'Reilly, and LevelUp. [2]
+SOURCE [2] Leveraging Content Partner Resources: GitLab provides access to premium content from leading industry partners to support diverse learning objectives across all teams.
+
+Through Masterclass, team members can access world-class instruction from renowned experts across business, leadership, creative, and technical disciplines.
+
+For technical teams, Google Cloud Skills Boost offers hands-on labs and courses to build cloud computing expertise and earn Google Cloud certifications.
+
+O'Reilly provides an extensive library of technical books, videos, and interactive learning resources covering programming, data science, cybersecurity, and emerging technologies.
+
+Additionally, LevelUp houses an extensive, searchable library of content fro
+------------------------------------------------------------
