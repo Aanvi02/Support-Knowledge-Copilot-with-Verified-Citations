@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support Knowledge Copilot</title>
+<style>
+  :root{--bg:#0b1020;--card:#141a2e;--line:#242c47;--text:#e5e7eb;--muted:#94a3b8;--acc:#6366f1;--acc2:#22d3ee;
+        --ok:#10b981;--warn:#f59e0b;--bad:#ef4444;--gray:#94a3b8}
+  [data-theme="light"]{--bg:#f5f7fb;--card:#fff;--line:#e2e8f0;--text:#0f172a;--muted:#64748b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;transition:background .3s}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+  .top{display:flex;justify-content:space-between;align-items:center}
+  h1{font-size:1.7rem;margin:0;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);margin:6px 0 20px}
+  .icon{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:8px 12px;cursor:pointer}
+  .row{display:flex;gap:8px}
+  input{flex:1;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:1rem;outline:none}
+  input:focus{border-color:var(--acc);box-shadow:0 0 0 3px #6366f133}
+  #go{padding:0 22px;border:0;border-radius:12px;color:#fff;font-weight:600;font-size:1rem;cursor:pointer;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+  #go:disabled{opacity:.5;cursor:wait}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:6px 12px;font-size:.85rem;cursor:pointer;transition:.2s}
+  .chip:hover{color:var(--text);border-color:var(--acc);transform:translateY(-1px)}
+  .hidden{display:none!important}
+  .steps{display:flex;gap:10px;margin:18px 0}
+  .step{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);text-align:center;font-size:.9rem}
+  .step.active{color:var(--text);border-color:var(--acc);animation:pulse 1s infinite}
+  .step.done{color:var(--ok);border-color:var(--ok)}
+  @keyframes pulse{50%{box-shadow:0 0 0 4px #6366f144}}
+  .summary{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px;color:var(--muted);font-size:.9rem}
+  .badge{display:inline-block;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:999px;margin-right:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gray);border-radius:12px;padding:14px 16px;margin:10px 0;animation:rise .35s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}}
+  .VERIFIED{border-left-color:var(--ok)} .VERIFIED .badge{background:#10b98122;color:var(--ok)}
+  .UNSUPPORTED{border-left-color:var(--warn)} .UNSUPPORTED .badge{background:#f59e0b22;color:var(--warn)}
+  .CONTRADICTED{border-left-color:var(--bad)} .CONTRADICTED .badge{background:#ef444422;color:var(--bad)}
+  .INVALID_CITATION .badge{background:#94a3b822;color:var(--gray)}
+  .bar{height:6px;border-radius:99px;background:var(--line);margin-top:10px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:99px;background:var(--gray);transition:width .9s ease}
+  .VERIFIED .fill{background:var(--ok)} .UNSUPPORTED .fill{background:var(--warn)} .CONTRADICTED .fill{background:var(--bad)}
+  .meta{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+  .cite{background:#6366f122;color:var(--acc);border:0;border-radius:6px;padding:2px 8px;cursor:pointer;font-weight:600}
+  .cite:hover{background:var(--acc);color:#fff}
+  h3{margin:26px 0 6px;font-size:1rem;color:var(--muted)}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:10px 14px}
+  summary{cursor:pointer;font-weight:500}
+  details.cited{border-color:var(--acc)}
+  details.flash{animation:flash 1.2s}
+  @keyframes flash{30%{background:#6366f133}}
+  .src-text{white-space:pre-wrap;color:var(--muted);font-size:.88rem;margin:10px 0}
+  a{color:var(--acc2)}
+  mark{background:#facc1566;color:inherit;padding:1px 3px;border-radius:4px}
+  .lab{margin-top:34px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+  .lab h2{margin:0 0 4px;font-size:1.1rem}
+  .lab p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+  #chk{padding:0 22px;border:0;border-radius:12px;color:#fff;font-weight:600;font-size:1rem;cursor:pointer;background:linear-gradient(90deg,#ef4444,#f59e0b)}
+  #chk:disabled{opacity:.5;cursor:wait}
+  .none{padding:18px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+  .foot{margin-top:30px;color:var(--muted);font-size:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Support Knowledge Copilot</h1>
+    <button class="icon" id="theme" title="Toggle theme">🌗</button>
+  </div>
+  <p class="sub">Ask GitLab's People Group handbook. Every claim is fact-checked against its cited source.</p>
+
+  <div class="row">
+    <input id="q" placeholder="Press / to focus. Try: How many weeks of paid parental leave does GitLab provide?">
+    <button id="go">Ask</button>
+  </div>
+  <div class="chips" id="examples"></div>
+  <div class="chips" id="history"></div>
+
+  <div class="steps hidden" id="steps">
+    <div class="step">🔎 Searching handbook</div>
+    <div class="step">✍️ Writing answer</div>
+    <div class="step">🛡️ Verifying claims</div>
+  </div>
+
+  <div id="out"></div>
+
+  <div class="lab">
+    <h2>🧪 Fact-check lab</h2>
+    <p>Type any claim, even a wrong one. The verifier checks it against the handbook and shows the evidence.</p>
+    <div class="row">
+      <input id="cl" placeholder="e.g. GitLab gives 6 weeks of paid parental leave">
+      <button id="chk">Check</button>
+    </div>
+    <div class="chips" id="trick"></div>
+    <div id="chkout"></div>
+  </div>
+
+  <div class="foot">Hybrid search (dense + BM25) → LLM with citations → NLI verification</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const BADGE = {VERIFIED:"✅ Verified", UNSUPPORTED:"⚠️ Unsupported", CONTRADICTED:"❌ Contradicted", INVALID_CITATION:"❓ Bad citation"};
+const EXAMPLES = ["How many weeks of paid parental leave does GitLab provide?", "Who do I contact to report harassment?", "What is the capital of Australia?"];
+const TRICKS = ["GitLab gives 6 weeks of paid parental leave", "Team members get a free company car", "GitLab has a no-tolerance harassment policy"];
+let timers = [], history = [], SOURCES = [];
+
+function el(tag, cls, text){
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function chips(box, list, fn){
+  box.replaceChildren();
+  list.forEach(t => { const c = el("span", "chip", t); c.onclick = () => fn(t); box.append(c); });
+}
+
+function runSteps(){
+  const s = [...document.querySelectorAll(".step")];
+  s.forEach(x => x.className = "step");
+  $("steps").classList.remove("hidden");
+  s[0].classList.add("active");
+  timers = [
+    setTimeout(() => { s[0].className = "step done"; s[1].classList.add("active"); }, 1500),
+    setTimeout(() => { s[1].className = "step done"; s[2].classList.add("active"); }, 6500),
+  ];
+}
+function stopSteps(){
+  timers.forEach(clearTimeout);
+  document.querySelectorAll(".step").forEach(x => x.className = "step done");
+  setTimeout(() => $("steps").classList.add("hidden"), 600);
+}
+
+async function ask(question){
+  const q = (question ?? $("q").value).trim();
+  if (!q) return;
+  $("q").value = q;
+  $("go").disabled = true;
+  $("out").replaceChildren();
+  runSteps();
+  const t0 = performance.now();
+  try {
+    const r = await fetch("/ask", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({question:q})});
+    if (!r.ok) throw new Error("Server error " + r.status);
+    const d = await r.json();
+    render(d, (performance.now() - t0) / 1000);
+    history = [q, ...history.filter(x => x !== q)].slice(0, 4);
+    chips($("history"), history, ask);
+  } catch (e) {
+    $("out").replaceChildren(el("div", "none", "Error: " + e.message));
+  }
+  stopSteps();
+  $("go").disabled = false;
+}
+
+function render(d, secs){
+  const out = $("out");
+  SOURCES = d.sources;
+  out.replaceChildren();
+  if (!d.answerable || !d.claims.length){
+    out.append(el("div", "none", "🤷 The handbook doesn't answer this, so the system won't guess."));
+    return;
+  }
+  const ok = d.claims.filter(c => c.verdict === "VERIFIED").length;
+  const sum = el("div", "summary");
+  sum.append(el("span", "", ok + "/" + d.claims.length + " claims verified · " + secs.toFixed(1) + "s"));
+  const copy = el("button", "icon", "Copy answer");
+  copy.onclick = () => { navigator.clipboard.writeText(d.claims.map(c => c.text).join(" ")); copy.textContent = "Copied ✓"; };
+  sum.append(copy);
+  out.append(sum);
+
+  const cited = new Set();
+  d.claims.forEach(c => {
+    c.sources.forEach(n => cited.add(n));
+    const card = el("div", "card " + c.verdict);
+    const line = el("div", "");
+    line.append(el("span", "badge", BADGE[c.verdict] || c.verdict), document.createTextNode(c.text));
+    const bar = el("div", "bar"), fill = el("div", "fill");
+    bar.append(fill);
+    const meta = el("div", "meta", "Sources:");
+    c.sources.forEach(n => {
+      const b = el("button", "cite", "[" + n + "]");
+      b.onclick = () => openSource(n, c);
+      meta.append(b);
+    });
+    meta.append(el("span", "", "· evidence match " + Math.round(c.entail * 100) + "%"));
+    card.append(line, bar, meta);
+    out.append(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => fill.style.width = Math.max(c.entail * 100, 4) + "%"));
+  });
+
+  out.append(el("h3", "", "Sources (click to read)"));
+  d.sources.forEach(s => {
+    const det = el("details", cited.has(s.n) ? "cited" : "");
+    det.id = "src-" + s.n;
+    det.append(el("summary", "", "[" + s.n + "] " + s.title + " › " + s.heading + (cited.has(s.n) ? "  ★ cited" : "")));
+    det.append(el("div", "src-text", s.text));
+    const a = el("a", "", "Open in handbook ↗");
+    a.href = s.url; a.target = "_blank"; a.rel = "noopener";
+    det.append(a);
+    out.append(det);
+  });
+}
+
+function highlight(box, text, sents){
+  box.replaceChildren();
+  const ranges = sents.map(s => [text.indexOf(s), s.length]).filter(r => r[0] >= 0).sort((a, b) => a[0] - b[0]);
+  let pos = 0;
+  ranges.forEach(([i, len]) => {
+    if (i < pos) return;
+    box.append(document.createTextNode(text.slice(pos, i)));
+    const m = document.createElement("mark");
+    m.textContent = text.slice(i, i + len);
+    box.append(m);
+    pos = i + len;
+  });
+  box.append(document.createTextNode(text.slice(pos)));
+}
+
+function openSource(n, claim){
+  const d = $("src-" + n);
+  if (!d) return;
+  const s = SOURCES[n - 1];
+  const sents = claim && claim.evidence_source === n ? claim.evidence : [];
+  highlight(d.querySelector(".src-text"), s.text, sents);
+  d.open = true;
+  d.scrollIntoView({behavior: "smooth", block: "center"});
+  d.classList.remove("flash"); void d.offsetWidth; d.classList.add("flash");
+}
+
+async function check(claim){
+  const c = (claim ?? $("cl").value).trim();
+  if (!c) return;
+  $("cl").value = c;
+  $("chk").disabled = true;
+  const out = $("chkout");
+  out.replaceChildren(el("p", "", "Checking..."));
+  try {
+    const r = await fetch("/check", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({claim:c})});
+    if (!r.ok) throw new Error("Server error " + r.status);
+    const d = await r.json();
+    out.replaceChildren();
+    const card = el("div", "card " + d.verdict);
+    const line = el("div", "");
+    line.append(el("span", "badge", BADGE[d.verdict] || d.verdict), document.createTextNode(d.claim));
+    const bar = el("div", "bar"), fill = el("div", "fill");
+    bar.append(fill);
+    card.append(line, bar, el("div", "meta", "Support " + Math.round(d.entail * 100) + "% · Contradiction " + Math.round(d.contradict * 100) + "%"));
+    if (d.evidence && d.evidence.length){
+      const src = d.sources[d.evidence_source - 1];
+      const ev = el("div", "src-text");
+      highlight(ev, src.text, d.evidence);
+      card.append(el("div", "meta", "Closest passage: " + src.title + " › " + src.heading), ev);
+    }
+    out.append(card);
+    const w = d.verdict === "CONTRADICTED" ? d.contradict : d.entail;
+    requestAnimationFrame(() => requestAnimationFrame(() => fill.style.width = Math.max(w * 100, 4) + "%"));
+  } catch (e) {
+    out.replaceChildren(el("div", "none", "Error: " + e.message));
+  }
+  $("chk").disabled = false;
+}
+
+$("go").onclick = () => ask();
+$("q").onkeydown = e => { if (e.key === "Enter") ask(); };
+$("chk").onclick = () => check();
+$("cl").onkeydown = e => { if (e.key === "Enter") check(); };
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement !== $("q") && document.activeElement !== $("cl")) { e.preventDefault(); $("q").focus(); }
+});
+$("theme").onclick = () => {
+  const r = document.documentElement;
+  r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark";
+};
+chips($("examples"), EXAMPLES, ask);
+chips($("trick"), TRICKS, check);
+</script>
+</body>
+</html>
