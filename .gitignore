@@ -4,5 +4,4 @@ venv/
 __pycache__/
 *.pyc
 data/raw/
-data/chunks.json
-data/index.faiss
+
