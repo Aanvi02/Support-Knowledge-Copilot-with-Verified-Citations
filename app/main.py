@@ -1,3 +1,6 @@
+from datetime import datetime, timezone
+from collections import Counter
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -5,10 +8,11 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from generate import answer
-from retrieve import search
+from retrieve import CHUNKS, search
 from verify import verify_claim
 
 app = FastAPI(title="Support Knowledge Copilot")
+STATIC = Path(__file__).parent / "static"
 
 
 class Ask(BaseModel):
@@ -28,8 +32,55 @@ def pack(chunks):
 
 @app.get("/")
 def home():
-    return FileResponse(Path(__file__).parent / "static" / "index.html")
+    return FileResponse(STATIC / "dashboard.html")
 
+
+@app.get("/dashboard")
+def dashboard():
+    return FileResponse(STATIC / "dashboard.html")
+
+
+@app.get("/classic")
+def classic():
+    return FileResponse(STATIC / "index.html")
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
+@app.get("/stats")
+def stats():
+    return {
+        "documents": len({c["title"] for c in CHUNKS}),
+        "chunks": len(CHUNKS),
+        "model": os.environ.get("GROQ_MODEL"),
+        "retrieval": "Hybrid search (dense + BM25)",
+    }
+@app.get("/documents")
+def documents():
+    counts = Counter(c["title"] for c in CHUNKS)
+    urls = {}
+    for c in CHUNKS:
+        urls.setdefault(c["title"], c["url"])
+    index_file = Path("data/index.faiss")
+    indexed = (
+        datetime.fromtimestamp(index_file.stat().st_mtime, tz=timezone.utc).isoformat()
+        if index_file.exists()
+        else None
+    )
+    return [
+        {
+            "name": title,
+            "type": "Handbook page",
+            "chunks": n,
+            "status": "Indexed",
+            "last_indexed": indexed,
+            "url": urls[title],
+        }
+        for title, n in sorted(counts.items())
+    ]
 
 @app.post("/ask")
 def ask(body: Ask):
