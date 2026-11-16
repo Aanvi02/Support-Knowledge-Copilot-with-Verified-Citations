@@ -187,6 +187,28 @@
   .ok{display:inline-flex;gap:6px;align-items:center;font-size:.8rem;font-weight:600;color:#16a34a;background:#e6f6ec;border-radius:999px;padding:2px 11px}
   .ok::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
   .cbar{display:flex;align-items:center;gap:10px}.cbar i{display:block;height:6px;border-radius:99px;background:var(--blue);opacity:.8}
+
+  /* how it works */
+  .pipe{list-style:none;margin:16px 0 0;padding:0}
+  .pipe li{position:relative;background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(15,23,42,.07);padding:16px 18px 16px 62px;margin-bottom:24px}
+  .pipe li::after{content:"";position:absolute;left:31px;top:100%;height:24px;border-left:2px solid #cbd5e1}
+  .pipe li:last-child{margin-bottom:0}.pipe li:last-child::after{display:none}
+  .pipe .n{position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+  .pipe b{display:block;margin-bottom:2px}.pipe span.d{color:var(--muted);font-size:.92rem;line-height:1.6}
+  .tech{display:inline-block;margin:8px 6px 0 0;font-size:.78rem;background:#eef2f7;border-radius:6px;padding:2px 9px;color:var(--ink);font-family:ui-monospace,Menlo,Consolas,monospace}
+  .rules{margin-top:22px}.rules table td:first-child{white-space:nowrap}
+  /* analytics */
+  .agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:16px 0}
+  .abox{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(15,23,42,.07);padding:18px;margin-bottom:16px}
+  .abox h3{margin:0 0 12px;font-size:1rem}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:120px}
+  .bars div{flex:1;background:var(--blue);border-radius:4px 4px 0 0;min-height:3px;opacity:.85}
+  .barcap{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem;margin-top:6px}
+  .stack{display:flex;gap:3px;height:14px;border-radius:99px;overflow:hidden;margin-bottom:10px}
+  .stack div{background:var(--c)}
+  .lgd{display:flex;gap:14px;flex-wrap:wrap;font-size:.86rem;color:var(--muted)}
+  .lgd i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px}
+  .abox ul{margin:0;padding-left:18px;color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
@@ -313,6 +335,37 @@
         </table></div>
       </section>
 
+      <!-- HOW IT WORKS -->
+      <section id="page-how" class="hidden">
+        <div class="page-head"><div><h2>How It Works</h2><p>The pipeline that turns handbook pages into a checked answer. Names and thresholds below come from the project code.</p></div></div>
+        <ol class="pipe">
+          <li><span class="n">1</span><b>Knowledge documents</b><span class="d" id="how-docs">GitLab People Group handbook pages are the only source of truth for answers.</span></li>
+          <li><span class="n">2</span><b>Document ingestion</b><span class="d">Each page loses its front matter, is split by section heading, and long sections are split again. Very short pieces are merged into the chunk before them. Every chunk keeps its page title, heading and handbook URL.</span><br><span class="tech">app/ingest.py</span><span class="tech">data/chunks.json</span></li>
+          <li><span class="n">3</span><b>Embedding and indexing</b><span class="d">Each chunk is turned into a vector that captures its meaning, then stored in a vector index for fast similarity search.</span><br><span class="tech">Sentence Transformers: all-MiniLM-L6-v2</span><span class="tech">FAISS</span></li>
+          <li><span class="n">4</span><b>Hybrid retrieval</b><span class="d">A question is matched two ways: by meaning (top 20 from the vector index) and by exact words (top 20 from BM25). The two rankings are merged with Reciprocal Rank Fusion and the best 5 chunks are kept.</span><br><span class="tech">Semantic search + BM25</span><span class="tech">RRF, k=60</span></li>
+          <li><span class="n">5</span><b>LLM answer generation</b><span class="d" id="how-llm">The language model writes an answer from the retrieved chunks only, splits it into claims, and marks each claim with the sources it relied on, like [1]. If the chunks don't cover the question, it says so instead of guessing.</span><br><span class="tech" id="how-model">Model: loading…</span><span class="tech">Groq API</span></li>
+          <li><span class="n">6</span><b>Citation verification</b><span class="d">For each claim, the text of its cited sources is cut into 3-sentence windows. A natural language inference model scores how strongly each window supports or contradicts the claim, and the best match becomes the evidence.</span><br><span class="tech">cross-encoder/nli-MiniLM2-L6-H768</span></li>
+          <li><span class="n">7</span><b>Final answer with sources</b><span class="d">You see the answer claim by claim, a verdict for each, the evidence passage that decided it, and every source that was retrieved, marked cited or not cited.</span></li>
+        </ol>
+        <div class="abox rules"><h3>How a verdict is decided</h3>
+          <div class="tw" style="box-shadow:none"><table>
+            <thead><tr><th>Verdict</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill v-VERIFIED">Verified</span></td><td>Best support score is 0.50 or higher</td></tr>
+              <tr><td><span class="pill v-CONTRADICTED">Contradicted</span></td><td>Support is below 0.50 and the best contradiction score is 0.50 or higher</td></tr>
+              <tr><td><span class="pill v-UNSUPPORTED">Unsupported</span></td><td>Neither score reaches 0.50, so the cited text neither confirms nor denies the claim</td></tr>
+              <tr><td><span class="pill v-INVALID_CITATION">Bad citation</span></td><td>The claim cites a source number that doesn't exist</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="page-analytics" class="hidden">
+        <div class="page-head"><div><h2>System Analytics</h2><p>Usage and quality, measured from questions asked in this browser.</p></div><button class="btn" id="an-reset">Reset analytics</button></div>
+        <div id="an-body"></div>
+      </section>
+
       <!-- other sections: built next -->
       <section id="page-other" class="hidden">
         <div class="placeholder"><h2 id="other-title"></h2><p>This section is built in the next step. Until then, you can use the working app.</p><p><a href="/classic">Open the classic app</a></p></div>
@@ -341,7 +394,9 @@ function route(){
   $("page-ask").classList.toggle("hidden", r !== "ask");
   $("page-verify").classList.toggle("hidden", r !== "verify");
   $("page-knowledge").classList.toggle("hidden", r !== "knowledge");
-  $("page-other").classList.toggle("hidden", ["dashboard","ask","verify","knowledge"].includes(r));
+  $("page-how").classList.toggle("hidden", r !== "how");
+  $("page-analytics").classList.toggle("hidden", r !== "analytics");
+  $("page-other").classList.toggle("hidden", ["dashboard","ask","verify","knowledge","how","analytics"].includes(r));
   $("other-title").textContent = TITLES[r];
   document.querySelectorAll(".menu a").forEach(a => {
     if (a.dataset.route === r) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
@@ -352,6 +407,8 @@ function route(){
   if (r === "ask") { checkBackend(); $("q").focus(); }
   if (r === "verify") renderVerify();
   if (r === "knowledge") loadKB();
+  if (r === "how") loadHow();
+  if (r === "analytics") renderAnalytics();
 }
 addEventListener("hashchange", route);
 
@@ -651,6 +708,61 @@ function drawKB(){
   });
 }
 $("kb-search").oninput=drawKB;$("kb-sort").onchange=drawKB;$("kb-refresh").onclick=loadKB;
+
+/* ============ HOW IT WORKS ============ */
+async function loadHow(){
+  const r=await getJSON(CONFIG.endpoints.stats),d=r.ok?r.data:{};
+  if(d.documents!=null&&d.chunks!=null)$("how-docs").textContent="GitLab People Group handbook pages are the only source of truth for answers. Right now the index holds "+Number(d.documents).toLocaleString()+" pages split into "+Number(d.chunks).toLocaleString()+" chunks.";
+  $("how-model").textContent="Model: "+(d.model||"not reported by backend");
+}
+
+/* ============ ANALYTICS ============ */
+function renderAnalytics(){
+  const body=$("an-body");body.replaceChildren();
+  const log=readLog();
+  if(!log.length){
+    const n=el("div","noans");n.append(el("b","","No queries yet"),document.createTextNode("Ask a few questions and your usage figures will appear here."));
+    const a=el("a","","Ask a question");a.href="#ask";a.style.cssText="display:inline-block;margin-top:8px;font-weight:600";n.append(document.createElement("br"),a);body.append(n);return;
+  }
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const claims=log.reduce((a,x)=>a+(x.claims||0),0),ver=log.reduce((a,x)=>a+(x.v||0),0);
+  const failed=log.filter(x=>!x.answered),up=log.filter(x=>x.fb==="up").length,down=log.filter(x=>x.fb==="down").length;
+
+  const g=el("div","agrid");
+  [["Total queries",String(log.length),null],
+   ["Average response time",avg(log.map(x=>x.secs||0)).toFixed(1)+" s",null],
+   ["Avg. documents retrieved",avg(log.map(x=>x.retrieved||0)).toFixed(1),"Per query"],
+   ["Citation verification rate",claims?Math.round(ver/claims*100)+"%":"—",claims?ver+" of "+claims+" claims verified":"No claims checked yet"],
+   ["Unanswered queries",String(failed.length),Math.round(failed.length/log.length*100)+"% of all queries"],
+   ["User feedback",up+down?up+" helpful · "+down+" not":"None yet",null]
+  ].forEach(([k,v,n])=>{const x=el("div","mini");x.append(el("b","",v),el("span","",k));if(n){const q=el("div","",n);q.style.cssText="color:#94a3b8;font-size:.76rem;margin-top:4px";x.append(q);}g.append(x);});
+  body.append(g);
+
+  const last=log.slice(-20),max=Math.max(...last.map(x=>x.secs||0),1);
+  const b1=el("div","abox");b1.append(el("h3","","Response time, last "+last.length+" queries"));
+  const bars=el("div","bars");last.forEach(x=>{const d=el("div");d.style.height=Math.max((x.secs||0)/max*100,3)+"%";d.title=(x.secs||0).toFixed(1)+" s: "+x.q;bars.append(d);});
+  const cap=el("div","barcap");cap.append(el("span","","Older"),el("span","","Slowest: "+max.toFixed(1)+" s"),el("span","","Latest"));
+  b1.append(bars,cap);body.append(b1);
+
+  const b2=el("div","abox");b2.append(el("h3","","Claim verdicts"));
+  if(!claims)b2.append(el("p","","No claims checked yet."));
+  else{
+    const tot={VERIFIED:ver,UNSUPPORTED:log.reduce((a,x)=>a+(x.u||0),0),CONTRADICTED:log.reduce((a,x)=>a+(x.c||0),0),INVALID_CITATION:log.reduce((a,x)=>a+(x.i||0),0)};
+    const st=el("div","stack"),lg=el("div","lgd");
+    Object.keys(tot).filter(k=>tot[k]).forEach(k=>{
+      const seg=el("div","v-"+k);seg.style.flexGrow=tot[k];seg.title=BADGE[k][1]+": "+tot[k];st.append(seg);
+      const l=el("span","v-"+k);l.append(el("i"),document.createTextNode(BADGE[k][1]+" "+tot[k]));lg.append(l);
+    });
+    b2.append(st,lg);
+  }
+  body.append(b2);
+
+  const b3=el("div","abox");b3.append(el("h3","","Unanswered queries"));
+  if(!failed.length)b3.append(el("p","","Every question so far received an answer."));
+  else{const ul=el("ul");failed.slice(-8).reverse().forEach(x=>ul.append(el("li","",x.q)));b3.append(ul);}
+  body.append(b3);
+}
+$("an-reset").onclick=()=>{try{localStorage.removeItem("skc:log");}catch{}renderAnalytics();};
 
 route();
 </script>
